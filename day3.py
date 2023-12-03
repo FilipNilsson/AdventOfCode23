@@ -24,15 +24,8 @@ for row, line in enumerate(input):
 print(sum)
 
 # Second half
-with open('input.txt') as file_:
-    input = file_.read().splitlines()
-for idx, line in enumerate(input):  # Add surrounding dots
-    input[idx] = '.' + line + '.'
-input.insert(0, '.' * len(input[0]))
-input.append('.' * len(input[0]))
-
 numbers = []
-for row, line in enumerate(input):
+for row, line in enumerate(input):  # Create bounding boxes around every number and store the number value in it
     number = {'number': '', 'bound': [[999999999999,0], [0,0]]}  # bound is ((x_min, y_min), (x_max, y_max))
     for col, char in enumerate(line):
         if char.isdigit():
@@ -47,7 +40,7 @@ for row, line in enumerate(input):
             number = {'number': '', 'bound': [[999999999999,0], [0,0]]}
 
 sum = 0
-for row, line in enumerate(input):
+for row, line in enumerate(input):  # Process every gear in input
     for col, char in enumerate(line):
         if char == '*':
             numbers_touched = []

@@ -3,14 +3,14 @@ with open('input.txt') as file_:
 
 # Part 1
 seeds = [int(x) for x in input[0].split(' ')[1:]]
-maps = remapped_indices = []
+remapped_indices = []
 for line in input[2:]:
     if line == '':
         # remaining seeds keep their number
         continue
     if ':' in line:
         # new map
-        maps = remapped_indices = []
+        remapped_indices = []
         continue
     dest, src, length = [int(x) for x in line.split()]
     for idx, seed in enumerate(seeds):
@@ -26,11 +26,11 @@ print(min(seeds))
 # Print 2
 numbers = [int(x) for x in input[0].split(' ')[1:]]
 ranges = []
-for idx, number in enumerate(range(0, len(numbers), 2)):
+for idx in range(len(numbers)//2):
     ranges.append(range(numbers[2*idx], numbers[2*idx] + numbers[2*idx+1]))
 
-new_ranges = []
-pending_ranges = []
+new_ranges = []  # Ranges that were changed by current mapping
+pending_ranges = []  # Leftover ranges when parts of a range is re-mapped
 for line in input[2:]:
     if line == '':
         continue
